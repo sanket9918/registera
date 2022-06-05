@@ -5,7 +5,7 @@ class FormItem extends StatelessWidget {
 
   final String description;
 
-  const FormItem(this.title, this.description);
+  const FormItem(this.title, this.description, {super.key});
 
   @override
   Widget build(BuildContext context) {

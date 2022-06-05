@@ -44,6 +44,7 @@ class GraphqlConfig {
 
   static final HttpLink httpLink = HttpLink(
     "http://10.0.2.2:5000/graphql",
+    // "http://192.168.42.63:5000/graphql"
   );
 
   static ValueNotifier<GraphQLClient> initialiseClient() {

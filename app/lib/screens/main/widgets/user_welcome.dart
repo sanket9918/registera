@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:registera/config/util.dart';
+import 'package:registera/main.dart';
 
 class UserWelcome extends StatelessWidget {
   const UserWelcome({Key? key}) : super(key: key);
@@ -16,9 +19,10 @@ class UserWelcome extends StatelessWidget {
           if (snapshot.hasError) {
             children = Text("${snapshot.error}");
           }
+
           return Query(
               options: QueryOptions(
-                  document: gql('''
+                document: gql('''
                    query{
           me{
             _id
@@ -27,10 +31,14 @@ class UserWelcome extends StatelessWidget {
           }
                     }
                     '''),
-                  fetchPolicy: FetchPolicy.noCache,
-                  cacheRereadPolicy: CacheRereadPolicy.ignoreAll),
-              builder: (QueryResult result,
-                  {Refetch? refetch, FetchMore? fetchMore}) {
+                fetchPolicy: FetchPolicy.noCache,
+                cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
+              ),
+              builder: (
+                QueryResult result, {
+                Refetch? refetch,
+                FetchMore? fetchMore,
+              }) {
                 if (result.isLoading) {
                   return const SafeArea(
                       child: Scaffold(
@@ -54,6 +62,8 @@ class UserWelcome extends StatelessWidget {
                             "Loading complete, both data and errors are null")),
                   ));
                 }
+                Provider.of<User>(context, listen: false)
+                    .updateId(result.data?['me']?['_id']);
                 String? name = result.data?['me']?['name'];
                 String? email = result.data?['me']?['email'];
 

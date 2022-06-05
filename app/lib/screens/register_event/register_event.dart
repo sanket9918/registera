@@ -30,9 +30,9 @@ class RegisterEventForm extends StatelessWidget {
 '''), variables: {"formId": formId}),
         builder: (QueryResult resultQuery,
             {Refetch? refetch, FetchMore? fetchMore}) {
-          if (resultQuery.isLoading) {
-            return const Text("Loading....");
-          }
+          if (resultQuery.isLoading)
+            () => showLoaderDialog(context, "Loading..please wait");
+          
           if (resultQuery.data == null && !resultQuery.hasException) {
             return const Text(
                 "Loading complete, both data and errors are null");
@@ -235,4 +235,22 @@ mutation CreateResponse(\$input:CreateResponseInput!) {
           );
         });
   }
+}
+
+showLoaderDialog(context, String text) {
+  AlertDialog alert = AlertDialog(
+    content: new Row(
+      children: [
+        CircularProgressIndicator(),
+        Container(margin: EdgeInsets.only(left: 7), child: Text("$text")),
+      ],
+    ),
+  );
+  showDialog(
+    barrierDismissible: false,
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

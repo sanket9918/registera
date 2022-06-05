@@ -89,8 +89,10 @@ class _LoginPageState extends State<LoginPage> {
                             debugPrint("$response");
                             await storage.write(
                                 key: 'jwt', value: response.data['token']);
+                              
 
                             await Config.loginPref(response.data['token']);
+                           
                             Config.retrieveAuthPref();
 
                             Navigator.pushReplacementNamed(

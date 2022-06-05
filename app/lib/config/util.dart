@@ -6,6 +6,11 @@ class Config {
     prefs = await SharedPreferences.getInstance();
     prefs.setBool(key, value);
   }
+  static saveStringPref(String key, value) async {
+    late SharedPreferences prefs;
+    prefs = await SharedPreferences.getInstance();
+    prefs.setString(key, value);
+  }
 
   static loginPref(String jwt) async {
     late SharedPreferences prefs;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:registera/client/client.dart';
 import 'package:registera/config/util.dart';
 import 'package:registera/screens/auth/login.dart';
@@ -26,8 +27,8 @@ class MyApp extends StatelessWidget {
     ValueNotifier<GraphQLClient> client = GraphqlConfig.initialiseClient();
     return GraphQLProvider(
         client: client,
-        child:
-            MaterialApp(debugShowCheckedModeBanner: false, home: HomePage()));
+        child: const MaterialApp(
+            debugShowCheckedModeBanner: false, home: HomePage()));
   }
 }
 
@@ -42,10 +43,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = ThemeData();
-    String? _token = "";
+    String? token = "";
 
     initMethod(context) async {
-      _token = await Config.showToken();
+      token = await Config.showToken();
     }
 
     @override
@@ -61,20 +62,33 @@ class _HomePageState extends State<HomePage> {
 
     ToastContext().init(context);
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      routes: routes,
-      theme: theme.copyWith(
-        colorScheme: theme.colorScheme.copyWith(
-            background: const Color(0xFFFAFAFA),
-            primary: const Color(0xFF008278),
-            secondary: const Color(0xFFFFBD00)),
-        textTheme: theme.textTheme.copyWith(
-            headline1: const TextStyle(color: Color(0xFF100E34)),
-            bodyText1:
-                TextStyle(color: const Color(0xFF100E34).withOpacity(0.5))),
+    return ChangeNotifierProvider(
+      create: (context) => User(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        routes: routes,
+        theme: theme.copyWith(
+          colorScheme: theme.colorScheme.copyWith(
+              background: const Color(0xFFFAFAFA),
+              primary: const Color(0xFF008278),
+              secondary: const Color(0xFFFFBD00)),
+          textTheme: theme.textTheme.copyWith(
+              headline1: const TextStyle(color: Color(0xFF100E34)),
+              bodyText1:
+                  TextStyle(color: const Color(0xFF100E34).withOpacity(0.5))),
+        ),
+        home: const OnboardingScreen(),
       ),
-      home: const OnboardingScreen(),
     );
   }
+}
+
+class User extends ChangeNotifier {
+  Map<String, dynamic> data = {"_id": ""};
+
+  void updateId(String input) {
+    data['_id'] = input;
+  }
+
+  notifyListeners();
 }

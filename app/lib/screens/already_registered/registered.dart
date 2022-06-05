@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:registera/config/util.dart';
+import 'package:registera/main.dart';
 import 'package:registera/util/size_util.dart';
 import 'package:registera/widgets/custom_app_bar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AlreadyRegistered extends StatelessWidget {
   const AlreadyRegistered({Key? key}) : super(key: key);
@@ -33,16 +37,40 @@ class AlreadyRegistered extends StatelessWidget {
   }
 }
 
-class ListOfEvents extends StatelessWidget {
+Future<String?> getId() async {
+  late SharedPreferences prefs;
+
+  prefs = await SharedPreferences.getInstance();
+  String? token = prefs.getString('userId');
+
+  ListOfEvents.userId = token;
+  return token;
+}
+
+class ListOfEvents extends StatefulWidget {
+  static String? userId;
+
   const ListOfEvents({Key? key}) : super(key: key);
+
+  @override
+  State<ListOfEvents> createState() => _ListOfEventsState();
+}
+
+class _ListOfEventsState extends State<ListOfEvents> {
+  String? userId;
+  @override
+  void initState() {
+    super.initState();
+    getId();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Query(
         options: QueryOptions(
             document: gql('''
-query {
-  findResponseByUser(input: { userId: "6280ec16363289a038e667b0" }) {
+query FindResponseByUser(\$input:GetResponseByUser!) {
+  findResponseByUser(input: \$input) {
     _id
     userName
     userEmail
@@ -53,6 +81,11 @@ query {
 }
 
 '''),
+            variables: {
+              "input": {
+                "userId": Provider.of<User>(context).data["_id"].toString()
+              }
+            },
             fetchPolicy: FetchPolicy.noCache,
             cacheRereadPolicy: CacheRereadPolicy.ignoreAll),
         builder: (QueryResult result,
@@ -75,7 +108,6 @@ query {
             height: SizeConfig.screenH,
             child: ListView.separated(
                 scrollDirection: Axis.vertical,
-                physics: ClampingScrollPhysics(),
                 itemBuilder: (context, index) {
                   return Container(
                     padding: const EdgeInsets.symmetric(

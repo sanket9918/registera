@@ -19,7 +19,9 @@ class Forms extends StatelessWidget {
     formId
     }
     }
-    ''')),
+    '''),
+            fetchPolicy: FetchPolicy.noCache,
+            cacheRereadPolicy: CacheRereadPolicy.ignoreAll),
         builder: (QueryResult result,
             {Refetch? refetch, FetchMore? fetchMore}) {
           if (result.isLoading) {
