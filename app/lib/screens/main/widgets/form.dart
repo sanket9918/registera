@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:registera/screens/main/widgets/form_item.dart';
 import 'package:registera/screens/register_event/register_event.dart';
-import 'package:registera/util/size_util.dart';
+
 
 class Forms extends StatelessWidget {
   const Forms({Key? key}) : super(key: key);
@@ -39,7 +39,7 @@ class Forms extends StatelessWidget {
           List resultList = result.data!['forms'];
           return ListView.separated(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             scrollDirection: Axis.vertical,
             itemCount: resultList.length,
             separatorBuilder: (_, index) => const SizedBox(

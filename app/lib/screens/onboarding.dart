@@ -41,14 +41,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   initMethod(context) async {
-
     // bool _onboardPref =
     //     Provider.of<OnboardingPref>(context, listen: false).isOnboarded;
     String? _onboardPref = await Config.showToken();
 
-    if (_onboardPref!.isNotEmpty) {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (context) => Splash()));
+    if (_onboardPref != null) {
+      if (_onboardPref.isNotEmpty) {
+        Navigator.of(context)
+            .pushReplacement(MaterialPageRoute(builder: (context) => Splash()));
+      }
     }
   }
 

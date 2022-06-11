@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:registera/screens/already_registered/registered.dart';
-
 import 'package:registera/screens/main/widgets/form.dart';
 import 'package:registera/screens/main/widgets/user_welcome.dart';
-import 'package:registera/util/size_util.dart';
 import 'package:registera/widgets/custom_app_bar.dart';
 
 class Dashboard extends StatelessWidget {
@@ -30,12 +28,12 @@ class Dashboard extends StatelessWidget {
                     GestureDetector(
                       onTap: (() {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (_) => AlreadyRegistered()));
+                            builder: (_) => const AlreadyRegistered()));
                       }),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 70, child: const UserWelcome()),
+                          const SizedBox(height: 70, child: UserWelcome()),
                           Container(
                             height: 70,
                             padding: const EdgeInsets.symmetric(
@@ -71,6 +69,18 @@ class Dashboard extends StatelessWidget {
                       height: 5,
                     ),
                     const Forms(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "Crafted with love. \n By Sanket.",
+                      style: Theme.of(context).textTheme.headline1!.copyWith(
+                          letterSpacing: 2,
+                          fontSize: 21,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey.withOpacity(0.4)),
+                      textAlign: TextAlign.center,
+                    )
                   ],
                 ),
               ),

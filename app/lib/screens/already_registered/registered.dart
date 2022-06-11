@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:registera/config/util.dart';
 import 'package:registera/main.dart';
-import 'package:registera/util/size_util.dart';
 import 'package:registera/widgets/custom_app_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -106,7 +104,7 @@ query FindResponseByUser(\$input:GetResponseByUser!) {
 
           return ListView.separated(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
                 return Container(

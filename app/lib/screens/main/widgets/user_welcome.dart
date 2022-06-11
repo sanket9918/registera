@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:registera/config/util.dart';
 import 'package:registera/main.dart';
 
 class UserWelcome extends StatelessWidget {
@@ -10,7 +9,7 @@ class UserWelcome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final storage = const FlutterSecureStorage();
+    const storage = FlutterSecureStorage();
     return FutureBuilder<String?>(
         future: storage.read(key: 'jwt'),
         builder: (context, snapshot) {
@@ -48,7 +47,7 @@ class UserWelcome extends StatelessWidget {
                   ));
                 }
                 if (result.data == null && !result.hasException) {
-                  return Scaffold(
+                  return const Scaffold(
                     body: Center(
                         child: Text(
                             "Loading complete, both data and errors are null")),
@@ -75,7 +74,7 @@ class UserWelcome extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          "Hi,${name}",
+                          "Hi,$name",
                           style: Theme.of(context)
                               .textTheme
                               .headline1!
