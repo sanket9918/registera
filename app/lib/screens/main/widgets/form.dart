@@ -10,7 +10,8 @@ class Forms extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Query(
-        options: QueryOptions(document: gql('''
+        options: QueryOptions(
+            document: gql('''
     query {
     forms{
     _id
@@ -36,32 +37,31 @@ class Forms extends StatelessWidget {
                 "Loading complete, both data and errors are null");
           }
           List resultList = result.data!['forms'];
-          return SizedBox(
-            height: SizeConfig.screenH,
-            child: ListView.separated(
-              scrollDirection: Axis.vertical,
-              itemCount: resultList.length,
-              separatorBuilder: (_, index) => const SizedBox(
-                height: 10,
-              ),
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: (() {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => RegisterEventForm(
-                            "${resultList[index]['formId']}")));
-                  }),
-                  // child: ListTile(
-                  //   title: Text("${resultList[index]['name']}"),
-                  //   subtitle: Text("${resultList[index]['description']}"),
-                  //   tileColor: Colors.transparent,
-                  // ),
-
-                  child: FormItem(resultList[index]['name'],
-                      resultList[index]['description']),
-                );
-              },
+          return ListView.separated(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            itemCount: resultList.length,
+            separatorBuilder: (_, index) => const SizedBox(
+              height: 10,
             ),
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: (() {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>
+                          RegisterEventForm("${resultList[index]['formId']}")));
+                }),
+                // child: ListTile(
+                //   title: Text("${resultList[index]['name']}"),
+                //   subtitle: Text("${resultList[index]['description']}"),
+                //   tileColor: Colors.transparent,
+                // ),
+
+                child: FormItem(resultList[index]['name'],
+                    resultList[index]['description']),
+              );
+            },
           );
         });
   }

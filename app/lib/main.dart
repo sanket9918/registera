@@ -62,8 +62,13 @@ class _HomePageState extends State<HomePage> {
 
     ToastContext().init(context);
 
-    return ChangeNotifierProvider(
-      create: (context) => User(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => User(),
+        ),
+        ChangeNotifierProvider(create: (context) => OnboardingPref())
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: routes,
@@ -90,5 +95,17 @@ class User extends ChangeNotifier {
     data['_id'] = input;
   }
 
+  @override
+  notifyListeners();
+}
+
+class OnboardingPref extends ChangeNotifier {
+  bool isOnboarded = false;
+
+  void updateOnBoardStatus() {
+    isOnboarded = true;
+  }
+
+  @override
   notifyListeners();
 }

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:registera/config/util.dart';
+import 'package:registera/main.dart';
 import 'package:registera/screens/auth/login.dart';
 import 'package:registera/screens/onboarding/data.dart';
 import 'package:registera/screens/splash.dart';
 import 'package:registera/util/size_util.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
@@ -37,8 +40,22 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
+  initMethod(context) async {
+    late SharedPreferences sharedPreferences;
+
+    // bool _onboardPref =
+    //     Provider.of<OnboardingPref>(context, listen: false).isOnboarded;
+    String? _onboardPref = await Config.showToken();
+
+    if (_onboardPref!.isNotEmpty) {
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (context) => Splash()));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) => initMethod(context));
     SizeConfig().init(context);
     double width = SizeConfig.screenW!;
     double height = SizeConfig.screenH!;
@@ -57,42 +74,39 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 onPageChanged: (value) => setState(() => _currentPage = value),
                 itemCount: contents.length,
                 itemBuilder: (context, i) {
-                  return Container(
-                    // color: colors[i],
-                    child: Padding(
-                      padding: const EdgeInsets.all(40.0),
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            contents[i].image,
-                            height: SizeConfig.blockV! * 35,
+                  return Padding(
+                    padding: const EdgeInsets.all(40.0),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          contents[i].image,
+                          height: SizeConfig.blockV! * 35,
+                        ),
+                        SizedBox(
+                          height: (height >= 840) ? 60 : 30,
+                        ),
+                        Text(
+                          contents[i].title,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: "Mulish",
+                            fontWeight: FontWeight.w600,
+                            fontSize: (width <= 550) ? 30 : 35,
                           ),
-                          SizedBox(
-                            height: (height >= 840) ? 60 : 30,
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          contents[i].desc,
+                          style: TextStyle(
+                            fontFamily: "Mulish",
+                            fontWeight: FontWeight.w300,
+                            fontSize: (width <= 550) ? 17 : 25,
                           ),
-                          Text(
-                            contents[i].title,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: "Mulish",
-                              fontWeight: FontWeight.w600,
-                              fontSize: (width <= 550) ? 30 : 35,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          Text(
-                            contents[i].desc,
-                            style: TextStyle(
-                              fontFamily: "Mulish",
-                              fontWeight: FontWeight.w300,
-                              fontSize: (width <= 550) ? 17 : 25,
-                            ),
-                            textAlign: TextAlign.center,
-                          )
-                        ],
-                      ),
+                          textAlign: TextAlign.center,
+                        )
+                      ],
                     ),
                   );
                 },
@@ -115,6 +129,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           padding: const EdgeInsets.all(30),
                           child: ElevatedButton(
                             onPressed: () {
+                              Provider.of<OnboardingPref>(context,
+                                      listen: false)
+                                  .updateOnBoardStatus();
                               Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
                                       builder: (_) => const Splash()));

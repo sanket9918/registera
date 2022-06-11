@@ -104,69 +104,60 @@ query FindResponseByUser(\$input:GetResponseByUser!) {
 
           List resultList = result.data!['findResponseByUser'];
 
-          return SizedBox(
-            height: SizeConfig.screenH,
-            child: ListView.separated(
-                scrollDirection: Axis.vertical,
-                itemBuilder: (context, index) {
-                  return Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 15, vertical: 10),
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            color: Theme.of(context).colorScheme.primary),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Response ID: ",
+          return ListView.separated(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              scrollDirection: Axis.vertical,
+              itemBuilder: (context, index) {
+                return Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Theme.of(context).colorScheme.primary),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Response ID: ",
+                        style: Theme.of(context).textTheme.headline1!.copyWith(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(resultList[index]['resId'],
                           style: Theme.of(context)
                               .textTheme
                               .headline1!
                               .copyWith(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(resultList[index]['resId'],
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline1!
-                                .copyWith(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.normal)),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          "Form ID: ",
+                                  fontSize: 16, fontWeight: FontWeight.normal)),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Form ID: ",
+                        style: Theme.of(context).textTheme.headline1!.copyWith(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(resultList[index]['form'],
                           style: Theme.of(context)
                               .textTheme
                               .headline1!
                               .copyWith(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(resultList[index]['form'],
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline1!
-                                .copyWith(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.normal))
-                      ],
-                    ),
-                  );
-                },
-                separatorBuilder: (_, index) => const SizedBox(
-                      height: 10,
-                    ),
-                itemCount: resultList.length),
-          );
+                                  fontSize: 16, fontWeight: FontWeight.normal))
+                    ],
+                  ),
+                );
+              },
+              separatorBuilder: (_, index) => const SizedBox(
+                    height: 10,
+                  ),
+              itemCount: resultList.length);
         });
   }
 }

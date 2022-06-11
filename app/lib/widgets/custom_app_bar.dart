@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:registera/config/util.dart';
+import 'package:registera/screens/onboarding.dart';
+import 'package:registera/screens/splash.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({Key? key}) : super(key: key);
@@ -29,7 +31,8 @@ class CustomAppBar extends StatelessWidget {
               await Config.clearToken();
               await Config.logoutPref();
 
-              Navigator.pushReplacementNamed(context, "/login");
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => OnboardingScreen()));
             },
           ),
         ],
