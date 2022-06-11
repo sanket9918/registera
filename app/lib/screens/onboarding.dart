@@ -41,7 +41,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   initMethod(context) async {
-    late SharedPreferences sharedPreferences;
 
     // bool _onboardPref =
     //     Provider.of<OnboardingPref>(context, listen: false).isOnboarded;

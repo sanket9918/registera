@@ -77,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                         try {
                           debugPrint("Hello");
                           Response response = await Dio()
-                              .post("http://192.168.42.144:5000/login", data: {
+                              .post("http://10.0.2.2:5000/login", data: {
                             "email": _emailAddressController.text,
                             "password": _passwordController.text
                           }).onError((error, stackTrace) =>
