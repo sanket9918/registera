@@ -19,3 +19,12 @@ A simple NodeJS (TypeScript) based backend coupled with Flutter based mobile app
   - Shared Preferences (Plastform (Android, iOS, Web) agnostic solution for persistent storage of user credentials).
 
   N.B - This app is created as a part of demostration for the integration of different modules with Flutter project and various other utilities that are commonly utilised for the full stack development.
+
+## Screenshots
+<img src="./images/8-registera.png"  height="500" />
+<img src="./images/7-registera.png"  height="500" />
+<img src="./images/6-registera.png"  height="500" />
+<img src="./images/5-registera.png"  height="500" />
+<img src="./images/4-registera.png"  height="500" />
+<img src="./images/3-registera.png"  height="500" />
+<img src="./images/1-registera.png"  height="500" />
