@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:registera/client/client.dart';
 import 'package:registera/config/util.dart';
 import 'package:registera/screens/auth/login.dart';
+import 'package:registera/screens/intro_splash.dart';
 import 'package:registera/screens/main/dashboard.dart';
-import 'package:registera/screens/onboarding.dart';
 import 'package:toast/toast.dart';
 
 void main() async {
@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> {
               bodyText1:
                   TextStyle(color: const Color(0xFF100E34).withOpacity(0.5))),
         ),
-        home: const OnboardingScreen(),
+        home: const IntroSplash(),
       ),
     );
   }
