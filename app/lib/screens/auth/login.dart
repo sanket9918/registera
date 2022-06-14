@@ -111,21 +111,21 @@ class _LoginPageState extends State<LoginPage> {
                   },
                   text: "Login",
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      debugPrint("Signup to be added");
-                    },
-                    child: const SizedBox(
-                      height: 20,
-                      child: Text(
-                        "New? Sign Up",
-                        style: TextStyle(decoration: TextDecoration.underline),
-                      ),
-                    ),
-                  ),
-                )
+                // Padding(
+                //   padding: const EdgeInsets.all(8.0),
+                //   child: GestureDetector(
+                //     onTap: () {
+                //       debugPrint("Signup to be added");
+                //     },
+                //     child: const SizedBox(
+                //       height: 20,
+                //       child: Text(
+                //         "New? Sign Up",
+                //         style: TextStyle(decoration: TextDecoration.underline),
+                //       ),
+                //     ),
+                //   ),
+                // )
               ],
             )
           ],
