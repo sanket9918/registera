@@ -24,7 +24,8 @@ async function bootstrap() {
   });
 
   const corsOptions = {
-    origin: '*',
+    // origin:"*", // for others
+    origin: 'http://localhost:3000', // for web
     credentials: true,
     exposedHeaders: ['Authorization'],
   };

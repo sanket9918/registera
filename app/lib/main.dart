@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
         ChangeNotifierProvider(
           create: (context) => User(),
         ),
-        ChangeNotifierProvider(create: (context) => OnboardingPref())
+        // ChangeNotifierProvider(create: (context) => OnboardingPref())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -99,13 +99,13 @@ class User extends ChangeNotifier {
   notifyListeners();
 }
 
-class OnboardingPref extends ChangeNotifier {
-  bool isOnboarded = false;
+// class OnboardingPref extends ChangeNotifier {
+//   bool isOnboarded = false;
 
-  void updateOnBoardStatus() {
-    isOnboarded = true;
-  }
+//   void updateOnBoardStatus() {
+//     isOnboarded = true;
+//   }
 
-  @override
-  notifyListeners();
-}
+//   @override
+//   notifyListeners();
+// }
