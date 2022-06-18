@@ -36,5 +36,5 @@ A simple NodeJS (TypeScript) based backend coupled with Flutter based mobile app
 <img src="./images/3-registera.png"  height="500" />
 <img src="./images/1.web.png" />
 <img src="./images/2.web.png" />
-<img src="./images/3.web"   />
+<img src="./images/3.web.png"   />
 </p>
