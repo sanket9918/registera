@@ -129,9 +129,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           padding: const EdgeInsets.all(30),
                           child: ElevatedButton(
                             onPressed: () {
-                              Provider.of<OnboardingPref>(context,
-                                      listen: false)
-                                  .updateOnBoardStatus();
+                              // Provider.of<OnboardingPref>(context,
+                              //         listen: false)
+                              //     .updateOnBoardStatus();
                               Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
                                       builder: (_) => const Splash()));

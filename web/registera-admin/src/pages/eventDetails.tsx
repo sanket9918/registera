@@ -5,7 +5,7 @@ import EventLogo from "./../assets/events.svg";
 export function EventDetailPage(props: any) {
   const formId = props.matches.id;
   const [findresponses, refershQuery] = useFindResponseByForm();
-  const [reponses, setResponses] = useState([
+  const [responses, setResponses] = useState([
     {
       _id: "",
       user: "",
@@ -20,8 +20,6 @@ export function EventDetailPage(props: any) {
         },
       },
       onCompleted: (data) => {
-        console.log(data);
-
         setResponses(data.findResponseByForm);
       },
     });
@@ -43,9 +41,9 @@ export function EventDetailPage(props: any) {
                   Refresh
                 </button>
               </div>
-              {reponses.length > 0 ? (
+              {responses.length > 0 ? (
                 <div class="mt-5 space-y-6">
-                  {reponses.map((e) => (
+                  {responses.map((e) => (
                     <div class="mt-4">
                       <div class="border-2 border-green-700 p-3 rounded-xl">
                         <div class="flex justify-between items-center">

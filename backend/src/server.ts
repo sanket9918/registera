@@ -25,7 +25,7 @@ async function bootstrap() {
 
   const corsOptions = {
     // origin:"*", // for others
-    origin: 'http://localhost:3000', // for web
+    origin: ['http://localhost:3000',"http://10.0.2.2"], // for web and android emulator
     credentials: true,
     exposedHeaders: ['Authorization'],
   };
