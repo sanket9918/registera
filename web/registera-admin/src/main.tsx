@@ -9,6 +9,8 @@ import { useSessionStorage } from "./hooks/useSessionStorage";
 import client from "./apollo-client";
 import { Dashboard } from "./pages/Dashboard";
 import { CreateForm } from "./pages/createForm";
+import { EventDetailCard } from "./components/EventDetailCard";
+import { EventDetailPage } from "./pages/eventDetails";
 
 const initalState: UserInfo = {
   id: "",
@@ -27,6 +29,10 @@ function Main() {
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/register" component={Register} />
             <Route path="/createForm" component={CreateForm} />
+            <Route
+              path="/eventDetail/:id?/:name?"
+              component={EventDetailPage}
+            />
           </Router>
         </UserContext.Provider>
       </ApolloProvider>

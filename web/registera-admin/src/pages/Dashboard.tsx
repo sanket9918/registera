@@ -1,11 +1,8 @@
 import { Link } from "preact-router";
-import { useContext, useEffect, useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import { AuthBody } from "../components/AuthBody";
-import { AuthHeader } from "../components/authHeader";
-import { useInfo } from "../GlobalContext/UserInfo";
 import useListEvents from "../hooks/useListEvents";
 import EventLogo from "./../assets/events.svg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export function Dashboard() {
   const [events, setEvents] = useState([
     {
@@ -43,22 +40,32 @@ export function Dashboard() {
                 </button>
               </div>
 
-              <div class="mt-5 space-y-6">
-                {events.map((e) => (
-                  <div class="border-2 border-green-700 p-3 rounded-xl">
-                    <div class="flex justify-between items-center">
-                      <p class="font-bold">{e.name}</p>
-                      <p>ID: {e.formId}</p>
+              {events.length > 0 ? (
+                <div class="mt-5 space-y-6">
+                  {events.map((e) => (
+                    <div class="mt-4">
+                      <Link href={`/eventDetail/${e._id}/${e.name} `}>
+                        <div class="border-2 border-green-700 p-3 rounded-xl">
+                          <div class="flex justify-between items-center">
+                            <p class="font-bold">{e.name}</p>
+                            <p>ID: {e.formId}</p>
+                          </div>
+                          Description: {e.description}
+                        </div>
+                      </Link>
                     </div>
-                    Description: {e.description}
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              ) : (
+                <div class="mt-5 space-y-6">
+                  <p>No events found.</p>
+                </div>
+              )}
             </div>
 
             <div class="mx-auto min-h-screen invisible lg:visible">
               <div class="flex flex-col justify-center items-center ">
-                <img src={EventLogo} height="5em" alt="" />
+                <img src={EventLogo} height="5em" alt="" class="h-[20em]" />
                 <p class="mt-4 font-bold">Your details in your control</p>
                 <p class="mt-2 ">
                   You can customise the way the info flows to the event manager.

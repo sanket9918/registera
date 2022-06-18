@@ -114,6 +114,9 @@ export function Register({}) {
                 </div>
               </div>
             </div>
+            <div class="mx-auto p-2 bg-green-700 text-white">
+              <p class="font-bold text-center mb-3">Made with ♡ by Sanket</p>
+            </div>
           </div>
         </>
       )}
