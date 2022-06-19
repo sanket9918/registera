@@ -6,6 +6,7 @@ const LIST_EVENTS = gql`
       _id
       name
       description
+      user
       formId
     }
   }

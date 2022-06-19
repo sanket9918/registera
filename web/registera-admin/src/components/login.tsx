@@ -1,5 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { route } from "preact-router";
+import { useState } from "preact/hooks";
 import * as yup from "yup";
 import { useInfo } from "../GlobalContext/UserInfo";
 import useLogin from "../hooks/useLogin";
@@ -8,6 +9,7 @@ import { Header } from "./header";
 export function Login({}) {
   const [loginIniator, queryUser] = useLogin();
   const { updateInfo } = useInfo();
+  const [generalError, setGeneralError] = useState("");
   return (
     <Formik
       initialValues={{
@@ -29,6 +31,9 @@ export function Login({}) {
               email: userData.data.me.email,
             });
             route("/dashboard");
+          },
+          onError: (data) => {
+            setGeneralError(data.message);
           },
         });
       }}
@@ -79,6 +84,9 @@ export function Login({}) {
                           />
                           <div className="block text-red-500">
                             <ErrorMessage name="password"></ErrorMessage>
+                          </div>
+                          <div className="block text-red-500">
+                            {generalError}
                           </div>
                           <button
                             type="submit"

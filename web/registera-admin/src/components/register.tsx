@@ -1,12 +1,13 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { route } from "preact-router";
+import { useState } from "preact/hooks";
 import * as yup from "yup";
 import useRegister from "../hooks/useRegister";
 import { Header } from "./header";
 
 export function Register({}) {
   const [register] = useRegister();
-
+  const [generalError, setGeneralError] = useState("");
   return (
     <Formik
       initialValues={{
@@ -27,6 +28,9 @@ export function Register({}) {
             route("/");
 
             // route("/dashboard", true);
+          },
+          onError: (data) => {
+            setGeneralError(data.message);
           },
         });
       }}
@@ -90,6 +94,9 @@ export function Register({}) {
                           />
                           <div className="block text-red-500">
                             <ErrorMessage name="password"></ErrorMessage>
+                          </div>
+                          <div className="block text-red-500">
+                            {generalError}
                           </div>
                           <button
                             type="submit"

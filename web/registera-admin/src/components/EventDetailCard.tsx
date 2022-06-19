@@ -8,8 +8,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { route } from "preact-router";
+import { useInfo } from "../GlobalContext/UserInfo";
+import useCreateResponse from "../hooks/useCreateResponse";
+
 export function EventDetailCard(props: any) {
+  const [owner, setOwner] = useState("");
+  const { userInfo } = useInfo();
+
   const [findresponses, refershQuery] = useFindResponseByForm();
+  const [createResponse] = useCreateResponse();
   const [responses, setResponses] = useState([
     {
       _id: "",
@@ -26,9 +33,11 @@ export function EventDetailCard(props: any) {
       },
       onCompleted: (data) => {
         setResponses(data.findResponseByForm);
+        setOwner(props.ownerUserId);
       },
     });
-  }, []);
+  });
+
   return (
     <>
       <AuthBody>
@@ -59,6 +68,32 @@ export function EventDetailCard(props: any) {
                 <p>
                   Form name: <span class="font-bold">{props.name}</span>
                 </p>
+                {(owner as string).match(userInfo.id) ? (
+                  <p></p>
+                ) : (
+                  <div class="mt-4 mx-auto text-center p-2 border border-green-700 rounded-lg">
+                    <p>Would you like to register for the event? </p>
+                    <button
+                      onClick={() => {
+                        createResponse({
+                          variables: {
+                            form: props.formId,
+                          },
+                          onCompleted: (data) => {
+                            alert("Response is successfully captured.");
+                            refershQuery();
+                          },
+                          onError: (data) => {
+                            alert("Already registered for the event.");
+                          },
+                        });
+                      }}
+                      className="h-12  mt-4 rounded-3xl bg-green-700 px-6 text-center text-sm text-white hover:bg-black  disabled:bg-slate-300 disabled:text-slate-600"
+                    >
+                      Register
+                    </button>
+                  </div>
+                )}
               </div>
               {responses.length > 0 ? (
                 <div class="mt-5 space-y-6">

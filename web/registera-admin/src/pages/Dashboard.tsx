@@ -10,6 +10,7 @@ export function Dashboard() {
     {
       _id: "",
       name: "",
+      user: "",
       description: "",
       formId: "",
     },
@@ -46,8 +47,8 @@ export function Dashboard() {
                 <div class="mt-5 space-y-6">
                   {events.map((e) => (
                     <div class="mt-4">
-                      <Link href={`/eventDetail/${e._id}/${e.name} `}>
-                        <div class="border-2 border-green-700 p-3 rounded-xl">
+                      <Link href={`/eventDetail/${e._id}/${e.name}/${e.user} `}>
+                        <div class="border-2 border-green-700 p-3 rounded-xl hover:text-white hover:bg-green-700">
                           <div class="flex justify-between items-center">
                             <p class="font-bold">{e.name}</p>
                             <p>ID: {e.formId}</p>

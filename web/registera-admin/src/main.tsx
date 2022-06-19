@@ -30,7 +30,7 @@ function Main() {
             <Route path="/register" component={Register} />
             <Route path="/createForm" component={CreateForm} />
             <Route
-              path="/eventDetail/:id?/:name?"
+              path="/eventDetail/:id?/:name?/:userId?"
               component={EventDetailPage}
             />
           </Router>
