@@ -1,6 +1,6 @@
 # Registera
 
-A simple NodeJS (TypeScript) based backend coupled with Flutter based mobile app and a Preact based admin web app for sample multipurpose registeration management app.
+A simple NodeJS (TypeScript) based backend coupled with Flutter based mobile app and a Preact based admin web app for sample multipurpose registration management app.
 
 ## Tech stack
 
