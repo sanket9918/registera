@@ -2,7 +2,12 @@ import { useEffect, useState } from "preact/hooks";
 import useFindResponseByForm from "../hooks/useFindResponseByForm";
 import { AuthBody } from "./AuthBody";
 import EventLogo from "./../assets/events.svg";
-
+import {
+  faArrowLeft,
+  faArrowRotateRight,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { route } from "preact-router";
 export function EventDetailCard(props: any) {
   const [findresponses, refershQuery] = useFindResponseByForm();
   const [responses, setResponses] = useState([
@@ -32,19 +37,27 @@ export function EventDetailCard(props: any) {
             <div>
               <div class="flex justify-between items-center">
                 <h2 class="font-semibold text-base md:text-2xl">
+                  <button
+                    onClick={() => {
+                      route("/dashboard", true);
+                    }}
+                    class="mr-4"
+                  >
+                    <FontAwesomeIcon icon={faArrowLeft} />
+                  </button>
                   Registrations
                 </h2>
                 <button
                   onClick={() => refershQuery()}
                   className="h-12 rounded-3xl bg-green-700 px-6 text-center text-sm text-white hover:bg-black  disabled:bg-slate-300 disabled:text-slate-600"
                 >
-                  Refresh
+                  <FontAwesomeIcon icon={faArrowRotateRight} /> Refresh
                 </button>
               </div>
 
               <div class="mt-4 mb-4">
                 <p>
-                  Form name: <span class="text-bold">{props.name}</span>
+                  Form name: <span class="font-bold">{props.name}</span>
                 </p>
               </div>
               {responses.length > 0 ? (

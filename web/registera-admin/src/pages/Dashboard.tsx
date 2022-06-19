@@ -1,3 +1,5 @@
+import { faArrowRotateRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "preact-router";
 import { useEffect, useState } from "preact/hooks";
 import { AuthBody } from "../components/AuthBody";
@@ -36,7 +38,7 @@ export function Dashboard() {
                   onClick={() => refershQuery()}
                   className="h-12 rounded-3xl bg-green-700 px-6 text-center text-sm text-white hover:bg-black  disabled:bg-slate-300 disabled:text-slate-600"
                 >
-                  Refresh
+                  <FontAwesomeIcon icon={faArrowRotateRight} /> Refresh
                 </button>
               </div>
 
