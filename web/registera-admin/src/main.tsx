@@ -11,6 +11,7 @@ import { Dashboard } from "./pages/Dashboard";
 import { CreateForm } from "./pages/createForm";
 import { EventDetailCard } from "./components/EventDetailCard";
 import { EventDetailPage } from "./pages/eventDetails";
+import { ErrorPage } from "./pages/404";
 
 const initalState: UserInfo = {
   id: "",
@@ -29,6 +30,7 @@ function Main() {
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/register" component={Register} />
             <Route path="/createForm" component={CreateForm} />
+            <Route default component={ErrorPage} />
             <Route
               path="/eventDetail/:id?/:name?/:userId?"
               component={EventDetailPage}
