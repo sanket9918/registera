@@ -101,7 +101,12 @@ export function EventDetailCard(props: any) {
                     <div class="mt-4">
                       <div class="border-2 border-green-700 p-3 rounded-xl">
                         <div class="flex justify-between items-center">
-                          <p class="font-bold">{e.userName}</p>
+                          <p class="font-bold">
+                            {e.userName}
+                            {e.user === userInfo.id ? (
+                              <span> - You</span>
+                            ) : null}
+                          </p>
                           <p>ID: {e.user}</p>
                         </div>
                       </div>
