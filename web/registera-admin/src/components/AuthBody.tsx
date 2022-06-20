@@ -1,9 +1,17 @@
 import type { ComponentChildren } from "preact";
+import { useEffect } from "preact/hooks";
 import { AuthHeader } from "./authHeader";
+import { route } from "preact-router";
 type Props = {
   children: ComponentChildren;
 };
 export function AuthBody(props: Props) {
+  useEffect(() => {
+    if (!sessionStorage.getItem("user")) {
+      // Any other logic can be used here....This is the simplest that works for demo here
+      route("/", true);
+    }
+  }, []);
   return (
     <div class="bg-slate-100 min-h-screen">
       <AuthHeader />

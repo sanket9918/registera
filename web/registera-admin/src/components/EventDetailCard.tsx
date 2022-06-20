@@ -5,6 +5,7 @@ import EventLogo from "./../assets/events.svg";
 import {
   faArrowLeft,
   faArrowRotateRight,
+  faCircleInfo,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { route } from "preact-router";
@@ -13,6 +14,7 @@ import useCreateResponse from "../hooks/useCreateResponse";
 
 export function EventDetailCard(props: any) {
   const [owner, setOwner] = useState("");
+  const [alreadyRegistered, setAlreadyRegistered] = useState(false);
   const { userInfo } = useInfo();
 
   const [findresponses, refershQuery] = useFindResponseByForm();
@@ -36,7 +38,16 @@ export function EventDetailCard(props: any) {
         setOwner(props.ownerUserId);
       },
     });
-  });
+  }, []);
+
+  useEffect(() => {
+    responses.map((e) => {
+      if (e.user.match(userInfo.id)) {
+        setAlreadyRegistered(true);
+        console.log("found it");
+      }
+    });
+  }, [responses]);
 
   return (
     <>
@@ -70,7 +81,7 @@ export function EventDetailCard(props: any) {
                 </p>
                 {(owner as string).match(userInfo.id) ? (
                   <p></p>
-                ) : (
+                ) : !alreadyRegistered ? (
                   <div class="mt-4 mx-auto text-center p-2 border border-green-700 rounded-lg">
                     <p>Would you like to register for the event? </p>
                     <button
@@ -93,7 +104,7 @@ export function EventDetailCard(props: any) {
                       Register
                     </button>
                   </div>
-                )}
+                ) : null}
               </div>
               {responses.length > 0 ? (
                 <div class="mt-5 space-y-6">
@@ -121,8 +132,13 @@ export function EventDetailCard(props: any) {
             </div>
             <div class="mx-auto min-h-screen invisible lg:visible">
               <div class="flex flex-col justify-center items-center ">
-                <img src={EventLogo} height="5em" alt="" class="h-[20em]" />
-                <p class="mt-4 font-bold">Registration Viewer</p>
+                {/* <img src={EventLogo} height="5em" alt="" class="h-[20em]" /> */}
+
+                <i class="text-[15em] text-green-700">
+                  <FontAwesomeIcon icon={faCircleInfo} />
+                </i>
+
+                <p class="-mt-10 font-bold">Registration Viewer</p>
                 <p class="mt-2 ">
                   You can explore the registerations done by the users.
                 </p>
