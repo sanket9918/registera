@@ -1,7 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
 import useFindResponseByForm from "../hooks/useFindResponseByForm";
 import { AuthBody } from "./AuthBody";
-import EventLogo from "./../assets/events.svg";
 import {
   faArrowLeft,
   faArrowRotateRight,
@@ -44,7 +43,6 @@ export function EventDetailCard(props: any) {
     responses.map((e) => {
       if (e.user.match(userInfo.id)) {
         setAlreadyRegistered(true);
-        console.log("found it");
       }
     });
   }, [responses]);

@@ -1,17 +1,16 @@
-import { render } from "preact";
-import { App } from "./app";
-import "./index.css";
-import Router, { Route } from "preact-router";
-import { Register } from "./components/register";
 import { ApolloProvider } from "@apollo/client";
+import { render } from "preact";
+import Router, { Route } from "preact-router";
+import client from "./apollo-client";
+import { App } from "./app";
+import { Register } from "./components/register";
 import { UserContext, UserInfo } from "./GlobalContext/UserInfo";
 import { useSessionStorage } from "./hooks/useSessionStorage";
-import client from "./apollo-client";
-import { Dashboard } from "./pages/Dashboard";
-import { CreateForm } from "./pages/createForm";
-import { EventDetailCard } from "./components/EventDetailCard";
-import { EventDetailPage } from "./pages/eventDetails";
+import "./index.css";
 import { ErrorPage } from "./pages/404";
+import { CreateForm } from "./pages/createForm";
+import { Dashboard } from "./pages/Dashboard";
+import { EventDetailPage } from "./pages/eventDetails";
 
 const initalState: UserInfo = {
   id: "",

@@ -35,6 +35,7 @@ export function Register({}) {
         });
       }}
       validationSchema={yup.object({
+        name: yup.string().required("Please enter you name."),
         email: yup
           .string()
           .email("Invalid email address")
