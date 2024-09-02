@@ -1,20 +1,20 @@
 import { gql, useLazyQuery, useQuery } from "@apollo/client";
 
 const LIST_EVENTS = gql`
-  query {
-    forms {
-      _id
-      name
-      description
-      user
-      formId
+    query {
+        forms {
+            _id
+            name
+            description
+            user
+            formId
+        }
     }
-  }
 `;
 
-function useListEvents() {
-  const [listEvents, { refetch: refershQuery }] = useLazyQuery(LIST_EVENTS);
+function useLazyListEvents() {
+    const [listEvents, { refetch: refershQuery }] = useLazyQuery(LIST_EVENTS);
 
-  return [listEvents, refershQuery];
+    return [listEvents, refershQuery];
 }
-export default useListEvents;
+export default useLazyListEvents;
